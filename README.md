@@ -1,4 +1,4 @@
-# VersionApp v1.2.0
+# VersionApp v1.3.0
 
 A small full-stack application used to experiment with a version-aware installer.
 
@@ -17,7 +17,7 @@ A small full-stack application used to experiment with a version-aware installer
 Run command:
 
 ```bash
-python app.py
+python app_missing.py
 ```
 
 Working directory:
@@ -31,6 +31,8 @@ Health URL:
 ```text
 http://127.0.0.1:5000/api/status
 ```
+
+> **Intentional test condition:** `app_missing.py` does not exist. The backend is expected to fail immediately. This version is designed to test installer failure handling.
 
 ## Frontend
 
@@ -59,16 +61,14 @@ http://127.0.0.1:8001
 ```bash
 cd backend
 python -m pip install -r requirements.txt
-python app.py
+python app_missing.py
 ```
 
-The backend runs at:
-
-http://127.0.0.1:5000
+The backend command is intentionally invalid for this release.
 
 ### Frontend
 
-From the `frontend` directory, start the frontend server:
+From the `frontend` directory:
 
 ```bash
 python -m http.server 8001
@@ -78,16 +78,28 @@ Then open:
 
 http://127.0.0.1:8001
 
-The frontend calls the backend API at:
-
-http://127.0.0.1:5000/api/status
-
 ## Version
 
-This is the `v1.2.0` version for the installer experiment.
+This is the `v1.3.0` version for the installer experiment.
 
-### v1.2.0 change
+### v1.3.0 change
 
-The frontend now runs on **port 8001** instead of port 8000.
+The backend startup command in the README intentionally points to a missing Python file.
 
-This change is intentional so the installer must read the frontend startup configuration and URL from the version's README rather than relying on a hard-coded port.
+Expected installer behavior:
+
+```text
+Environment setup succeeds
+        ↓
+Backend startup attempted
+        ↓
+Backend process exits immediately
+        ↓
+Installer detects failure
+        ↓
+Backend log tail is shown / error is surfaced
+        ↓
+Retry + Back are available
+        ↓
+No orphaned processes remain
+```
