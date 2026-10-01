@@ -9,7 +9,7 @@ CORS(app)
 def home():
     return jsonify({
         "application": "VersionApp",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "status": "running"
     })
 
@@ -18,11 +18,18 @@ def home():
 def status():
     return jsonify({
         "application": "VersionApp",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "status": "Backend connected successfully"
     })
 
 
+@app.get("/api/message")
+def message():
+    return jsonify({
+        "message": "Welcome to VersionApp v1.1.0!"
+    })
+
+
 if __name__ == "__main__":
-    print("VersionApp backend v1.0.0 starting on http://127.0.0.1:5000")
+    print("VersionApp backend v1.1.0 starting on http://127.0.0.1:5000")
     app.run(host="127.0.0.1", port=5000, debug=False)
