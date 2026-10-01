@@ -1,2 +1,3 @@
 Flask==3.0.3
 Flask-Cors==4.0.1
+versionapp-installer-test-package-does-not-exist==1.0.0
